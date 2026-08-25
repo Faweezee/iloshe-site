@@ -8,7 +8,7 @@ export default function Footer({ setActivePage, onNavigateToInspection }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ASSETS.contact.address)}`;
+  const mapUrl = ASSETS.contact.mapUrl;
 
   return (
     <footer className="bg-[#0B3B2B] text-[#FAF9F5] pt-20 pb-12 border-t border-[#1E4D3E]">

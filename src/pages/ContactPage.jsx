@@ -39,7 +39,17 @@ export default function ContactPage() {
           <div className="lg:col-span-5 space-y-8 font-sans-body">
             <div className="space-y-1">
               <span className="text-[10px] uppercase font-mono-data text-[#D96B27] block">Headquarters</span>
-              <p className="text-sm text-[#121824] leading-relaxed">{ASSETS.contact.address}</p>
+              <a 
+                href={ASSETS.contact.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-sm text-[#121824] leading-relaxed hover:text-[#0B3B2B] transition-colors group"
+              >
+                <span className="underline decoration-[#D96B27]/40 underline-offset-4 group-hover:decoration-[#D96B27]">
+                  {ASSETS.contact.address}
+                </span>
+                <span className="block text-[10px] text-[#D96B27] font-mono-data mt-0.5">📍 Open in Google Maps ↗</span>
+              </a>
             </div>
 
             <div className="space-y-1">
