@@ -88,7 +88,7 @@ export const ASSETS = {
   contact: {
     whatsapp: "2349112777778",
     phones: ["+234 911 277 7778", "+234 808 273 7645"],
-    email: "Info@ilosheproperties.com.ng",
+    email: "info@ilosheproperties.com",
     address: "167 Iju Road, beside Union Bank, Fagba Bus Stop, Lagos, Nigeria",
     mapUrl: "https://www.google.com/maps/place/Iloshe+Property+%26+Investment+Limited/@6.6407838,3.3213856,17.25z/data=!4m15!1m8!3m7!1s0x103b9143fc114369:0xc1ea70c4195133ef!2sIju+Ishaga+Rd,+Ifako%2FIjaye+101232,+Lagos!3b1!8m2!3d6.6409144!4d3.3235571!16s%2Fg%2F1tfhjfjv!3m5!1s0x103b911c9296eae9:0x93559fba3df906f5!8m2!3d6.642932!4d3.323384!16s%2Fg%2F11fnwz5mk2?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D",
     hours: "Monday - Saturday: 8:00 AM - 6:00 PM"

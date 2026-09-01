@@ -15,6 +15,18 @@ initialDeposit: "Flexible Monthly Installments"
 status: "Selling Fast"
 featured: true
 image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+overview: |
+  Along the ever-expanding Lekki-Epe Expressway axis of Ibeju-Lekki, Iloshe Gardens sits in a corridor where Lagos is steadily writing its next chapter.
+
+  Close to landmarks that define the area’s growth and lifestyle appeal, you are within reach of the Lekki Conservation Centre, Pan-Atlantic University, Dangote Refinery and Eleko Beach.
+
+  This is more than land on a map. It is a chance to secure your place in a neighbourhood shaped by infrastructure, commerce, tourism, education and industrial development.
+
+  And with an Excision, your investment comes with a recognised title that adds confidence to your ownership journey.
+
+  The roads are expanding. The neighbourhood is evolving. The future is drawing closer.
+
+  Iloshe Gardens, Abule Pan. Own today. Grow with tomorrow.
 pricingGrid:
   - size: "500 SQM"
     outright: "₦10,000,000"

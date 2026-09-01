@@ -19,34 +19,34 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Estate Name", name: "name", widget: "string" }
-      - { label: "Tagline", name: "tagline", widget: "string" }
-      - { label: "Location", name: "location", widget: "string" }
-      - { label: "Region Corridor", name: "region", widget: "select", options: ["Magboro", "Ibeju-Lekki", "Epe", "Ipaja", "Ikorodu", "Ota"] }
-      - { label: "Category", name: "category", widget: "select", options: ["Residential", "Commercial", "Waterfront"] }
-      - { label: "Display Price", name: "price", widget: "string" }
-      - { label: "Numeric Price (for filters)", name: "numericPrice", widget: "number", value_type: "int" }
-      - { label: "Legal Title", name: "title", widget: "string" }
-      - { label: "Verification Badge", name: "verificationBadge", widget: "string", default: "100% Charted & Verified" }
-      - { label: "Plot Size", name: "plotSize", widget: "string" }
-      - { label: "Payment Plan", name: "paymentPlan", widget: "string" }
-      - { label: "Initial Deposit", name: "initialDeposit", widget: "string" }
-      - { label: "Status Badge", name: "status", widget: "string" }
-      - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: true }
-      - { label: "Cover Image", name: "image", widget: "image" }
-      - { label: "Gallery Images", name: "gallery", widget: "list", field: { label: "Photo", name: "photo", widget: "image" }, required: false }
+      - { label: "Estate Name", name: "name", widget: "string", required: true }
+      - { label: "Tagline", name: "tagline", widget: "string", required: false }
+      - { label: "Location", name: "location", widget: "string", required: false }
+      - { label: "Region Corridor", name: "region", widget: "select", options: ["Magboro", "Ibeju-Lekki", "Epe", "Ipaja", "Ikorodu", "Ota"], required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Residential", "Commercial", "Waterfront"], required: false }
+      - { label: "Display Price", name: "price", widget: "string", required: false }
+      - { label: "Numeric Price (for filters)", name: "numericPrice", widget: "number", value_type: "int", required: false }
+      - { label: "Legal Title", name: "title", widget: "string", required: false }
+      - { label: "Verification Badge", name: "verificationBadge", widget: "string", default: "100% Charted & Verified", required: false }
+      - { label: "Plot Size", name: "plotSize", widget: "string", required: false }
+      - { label: "Payment Plan", name: "paymentPlan", widget: "string", required: false }
+      - { label: "Initial Deposit", name: "initialDeposit", widget: "string", required: false }
+      - { label: "Status Badge", name: "status", widget: "string", required: false }
+      - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: true, required: false }
+      - { label: "Cover Image", name: "image", widget: "image", required: false }
+      - { label: "Gallery Images", name: "gallery", widget: "list", field: { label: "Photo", name: "photo", widget: "image", required: false }, required: false }
       - { label: "Pricing Breakdown Grid", name: "pricingGrid", widget: "list", required: false, fields: [
-          { label: "Plot Size", name: "size", widget: "string" },
-          { label: "1 - 3 Months (Outright)", name: "outright", widget: "string" },
-          { label: "6 Months Plan", name: "sixMonths", widget: "string" },
-          { label: "12 Months Plan", name: "twelveMonths", widget: "string" }
+          { label: "Plot Size", name: "size", widget: "string", required: false },
+          { label: "1 - 3 Months (Outright)", name: "outright", widget: "string", required: false },
+          { label: "6 Months Plan", name: "sixMonths", widget: "string", required: false },
+          { label: "12 Months Plan", name: "twelveMonths", widget: "string", required: false }
         ]}
       - { label: "Estate Specific FAQs", name: "faqs", widget: "list", required: false, fields: [
-          { label: "Question", name: "question", widget: "string" },
-          { label: "Answer", name: "answer", widget: "text" }
+          { label: "Question", name: "question", widget: "string", required: false },
+          { label: "Answer", name: "answer", widget: "text", required: false }
         ]}
-      - { label: "Property Overview", name: "overview", widget: "markdown" }
-      - { label: "Infrastructure List", name: "infrastructure", widget: "list" }
+      - { label: "Property Overview", name: "overview", widget: "markdown", required: false }
+      - { label: "Infrastructure List", name: "infrastructure", widget: "list", required: false }
 
   # 2. Blog & Market Insights Articles Collection
   - name: "blog"
@@ -55,13 +55,13 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Article Title", name: "title", widget: "string" }
-      - { label: "Category", name: "category", widget: "select", options: ["Land Verification", "Legal & Titles", "Payment Strategy", "Market Insights"] }
-      - { label: "Read Time", name: "readTime", widget: "string", default: "5 min read" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Summary", name: "summary", widget: "text" }
-      - { label: "Full Body Content", name: "body", widget: "markdown" }
-      - { label: "Key Takeaways", name: "takeaways", widget: "list" }
+      - { label: "Article Title", name: "title", widget: "string", required: true }
+      - { label: "Category", name: "category", widget: "select", options: ["Land Verification", "Legal & Titles", "Payment Strategy", "Market Insights"], required: false }
+      - { label: "Read Time", name: "readTime", widget: "string", default: "5 min read", required: false }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: false }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Full Body Content", name: "body", widget: "markdown", required: false }
+      - { label: "Key Takeaways", name: "takeaways", widget: "list", required: false }
       - { label: "Featured Header Image", name: "featuredImage", widget: "image", required: false }
 
   # 3. Client Testimonials Collection (Text-Only Editorial Quotes)
@@ -71,7 +71,7 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Client Name", name: "name", widget: "string" }
-      - { label: "Role & Location", name: "role", widget: "string" }
-      - { label: "Estate Purchased", name: "location", widget: "string" }
-      - { label: "Testimonial Quote", name: "quote", widget: "text" }
+      - { label: "Client Name", name: "name", widget: "string", required: true }
+      - { label: "Role & Location", name: "role", widget: "string", required: false }
+      - { label: "Estate Purchased", name: "location", widget: "string", required: false }
+      - { label: "Testimonial Quote", name: "quote", widget: "text", required: false }

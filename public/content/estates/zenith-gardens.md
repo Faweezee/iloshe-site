@@ -15,6 +15,16 @@ initialDeposit: "Flexible Monthly Installments"
 status: "Selling Fast"
 featured: true
 image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"
+overview: |
+  Just 15 minutes from Berger, Zenith Gardens sits quietly on the edge of opportunity, giving civil servants, small business owners, young professionals, and families a practical pathway to land ownership.
+
+  Here, the dream isn't reserved for the few. It is a place where hard work can become a home, savings can become an investment, and a small beginning can grow into something lasting.
+
+  Set within a developed and secure residential community, Zenith Gardens offers more than a plot of land. It offers peace of mind, accessibility, and a clear path to building your future, free from omonile interference.
+
+  The city is expanding. The smart move is to secure your own corner of it.
+
+  Zenith Gardens, Magboro. Own your ground. Build your future. Grow with the city.
 pricingGrid:
   - size: "500 SQM"
     outright: "₦4,000,000"
