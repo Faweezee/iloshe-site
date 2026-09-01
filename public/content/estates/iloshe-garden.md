@@ -24,7 +24,7 @@ pricingGrid:
     sixMonths: ₦8,400,000
     twelveMonths: ₦10,800,000
 overview: >-
-  Along the ever-expanding Lekki-Epe Expressway axis of Ibeju-Lekki, Iloshe
+  A long the ever-expanding Lekki-Epe Expressway axis of Ibeju-Lekki, Iloshe
   Gardens sits in a corridor where Lagos is steadily writing its next chapter.
 
 
