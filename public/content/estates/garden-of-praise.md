@@ -24,7 +24,7 @@ pricingGrid:
     sixMonths: ₦29,400,000
     twelveMonths: ₦37,800,000
 overview: >-
-  😭Nestled near Eleko Junction and the prestigious Pan-Atlantic University,
+  Nestled near Eleko Junction and the prestigious Pan-Atlantic University,
   Ibeju-Lekki, Lagos, Garden of Praise sits where vision meets value.
 
 
