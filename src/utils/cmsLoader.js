@@ -13,7 +13,6 @@ function parseFrontmatter(rawContent) {
   const data = {};
 
   const lines = frontmatterStr.split(/\r?\n/);
-  let currentKey = null;
   let currentArrayKey = null;
   let currentObject = null;
 
@@ -23,6 +22,34 @@ function parseFrontmatter(rawContent) {
     if (!trimmed || trimmed.startsWith('#')) continue;
 
     const indent = line.search(/\S/);
+
+    // Multiline key: overview: | or overview: >
+    if (trimmed.includes(':') && (trimmed.endsWith('|') || trimmed.endsWith('>'))) {
+      const colonIdx = trimmed.indexOf(':');
+      const key = trimmed.slice(0, colonIdx).trim();
+      let multilineText = [];
+      i++;
+      while (i < lines.length) {
+        const nextLine = lines[i];
+        const nextIndent = nextLine.search(/\S/);
+        if (nextLine.trim() === '') {
+          multilineText.push('');
+          i++;
+          continue;
+        }
+        if (nextIndent > indent) {
+          multilineText.push(nextLine.trim());
+          i++;
+        } else {
+          i--;
+          break;
+        }
+      }
+      data[key] = multilineText.join('\n').trim();
+      currentArrayKey = null;
+      currentObject = null;
+      continue;
+    }
 
     // List item start: - key: val or - "string"
     if (trimmed.startsWith('- ')) {
@@ -82,7 +109,6 @@ function parseFrontmatter(rawContent) {
         data[key] = [];
         currentObject = null;
       } else {
-        currentKey = key;
         currentArrayKey = null;
         currentObject = null;
         data[key] = value;
@@ -109,8 +135,7 @@ export function getCMSEstates() {
       const hasValidPricingGrid = Array.isArray(data.pricingGrid) && 
         data.pricingGrid.length > 0 && 
         typeof data.pricingGrid[0] === 'object' && 
-        data.pricingGrid[0]?.size && 
-        data.pricingGrid[0]?.outright;
+        data.pricingGrid[0]?.size;
 
       const validPricingGrid = hasValidPricingGrid
         ? data.pricingGrid
@@ -125,28 +150,32 @@ export function getCMSEstates() {
         ? data.faqs.map(f => ({ question: f.question, answer: f.answer || f.text }))
         : (data.faqs !== undefined ? [] : null);
 
+      const overviewText = (data.overview !== undefined && data.overview !== null && String(data.overview).trim() !== '')
+        ? String(data.overview).trim()
+        : (body && body.trim() !== '' ? body.trim() : (defaultMatch.overview || ''));
+
       return {
         id: data.id || filename,
         name: data.name || defaultMatch.name || filename,
-        tagline: data.tagline || defaultMatch.tagline || '',
+        tagline: data.tagline !== undefined ? data.tagline : (defaultMatch.tagline || ''),
         location: data.location || defaultMatch.location || '',
         region: data.region || defaultMatch.region || 'Ibeju-Lekki',
         category: data.category || defaultMatch.category || 'Residential',
         price: data.price || defaultMatch.price || '₦6,000,000 - ₦18,000,000',
-        numericPrice: data.numericPrice || defaultMatch.numericPrice || 6000000,
+        numericPrice: data.numericPrice !== undefined ? data.numericPrice : (defaultMatch.numericPrice || 6000000),
         title: data.title || defaultMatch.title || 'Excision',
-        verificationBadge: data.verificationBadge || defaultMatch.verificationBadge || 'Excision Title',
+        verificationBadge: data.verificationBadge !== undefined ? data.verificationBadge : (defaultMatch.verificationBadge || ''),
         plotSize: data.plotSize || defaultMatch.plotSize || '300 SQM & 500 SQM',
         paymentPlan: data.paymentPlan || defaultMatch.paymentPlan || 'Outright (1-3 Mos), 6 Mos & 12 Mos Plans',
-        initialDeposit: data.initialDeposit || defaultMatch.initialDeposit || 'Flexible Monthly Installments',
-        status: data.status || defaultMatch.status || 'Selling Fast',
+        initialDeposit: data.initialDeposit !== undefined ? data.initialDeposit : (defaultMatch.initialDeposit || ''),
+        status: data.status !== undefined ? data.status : (defaultMatch.status || ''),
         featured: data.featured !== undefined ? data.featured : (defaultMatch.featured !== undefined ? defaultMatch.featured : true),
         image: data.image || defaultMatch.image || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
         gallery: parsedGallery,
         pricingGrid: validPricingGrid,
         faqs: validFaqs,
-        overview: body || data.overview || defaultMatch.overview || '',
-        infrastructure: Array.isArray(data.infrastructure) ? data.infrastructure : (defaultMatch.infrastructure || ["Instant Physical Allocation", "Verified Survey"])
+        overview: overviewText,
+        infrastructure: Array.isArray(data.infrastructure) ? data.infrastructure : (defaultMatch.infrastructure || [])
       };
     });
 
@@ -170,7 +199,7 @@ export function getCMSArticles() {
         category: data.category || 'Land Verification',
         readTime: data.readTime || '5 min read',
         summary: data.summary || '',
-        body: body || data.body || '',
+        body: (data.body !== undefined && String(data.body).trim() !== '') ? String(data.body).trim() : (body || ''),
         takeaways: Array.isArray(data.takeaways) ? data.takeaways : [],
         featuredImage: data.featuredImage || ''
       };

@@ -5,9 +5,11 @@ import { getCMSEstates } from '../utils/cmsLoader';
 import { MapPin, CheckCircle2, Calendar, MessageSquare, ArrowLeft, ShieldCheck, ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function EstateDetailPage({ estateId, estate: propEstate, onNavigateToInspection, setActivePage }) {
-  // Find estate by prop or estateId
+  // Always query dynamic CMS estates first by target ID so CMS updates reflect immediately
   const allEstates = getCMSEstates();
-  const estate = propEstate || allEstates.find(e => e.id === estateId) || ESTATES_DATA.find(e => e.id === estateId) || ESTATES_DATA[0];
+  const targetId = estateId || propEstate?.id;
+  const cmsMatch = targetId ? allEstates.find(e => e.id === targetId) : null;
+  const estate = cmsMatch || propEstate || allEstates[0];
   
   // Consolidate default image and gallery array without duplicates
   const galleryList = Array.from(new Set([estate?.image, ...(estate?.gallery || [])].filter(Boolean)));
@@ -179,17 +181,19 @@ export default function EstateDetailPage({ estateId, estate: propEstate, onNavig
             )}
 
             {/* Overview & Investment Potential */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-serif-display font-medium text-[#121824]">
-                Property Overview & Investment Value
-              </h2>
-              <p className="text-xs sm:text-sm text-[#5E6A7B] leading-relaxed whitespace-pre-line">
-                {estate.overview}
-              </p>
-            </div>
+            {estate.overview && (
+              <div className="space-y-4">
+                <h2 className="text-xl font-serif-display font-medium text-[#121824]">
+                  Property Overview & Investment Value
+                </h2>
+                <p className="text-xs sm:text-sm text-[#5E6A7B] leading-relaxed whitespace-pre-line">
+                  {estate.overview}
+                </p>
+              </div>
+            )}
 
             {/* Infrastructure & Amenities Checklist */}
-            {estate.infrastructure && (
+            {estate.infrastructure && estate.infrastructure.length > 0 && (
               <div className="space-y-4 bg-white border border-[#E5E2DC] p-8 shadow-sm">
                 <h2 className="text-xl font-serif-display font-medium text-[#121824]">
                   Estate Infrastructure & Physical Allocation Features
