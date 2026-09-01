@@ -1,13 +1,15 @@
 ---
-title: "How to Buy Land Safely in Nigeria Without Omonile Risk"
-category: "Land Verification"
-readTime: "5 min read"
+title: How to Buy Land Safely in Nigeria Without Omonile R
+category: Land Verification
+readTime: 5 min read
 date: 2026-08-01T12:00:00.000Z
-summary: "A practical guide for everyday buyers on inspecting land coordinates, verifying survey plans with the Surveyor General, and securing valid titles."
+summary: A practical guide for everyday buyers on inspecting land coordinates,
+  verifying survey plans with the Surveyor General, and securing valid titles.
 takeaways:
-  - "Always chart land coordinates at the Surveyor General's Office before making full payment."
-  - "Verify whether the property holds a C of O, Governor's Consent, or Gazette."
-  - "Insist on physical plot allocation and pegging on-site."
+  - Always chart land coordinates at the Surveyor General's Office before making
+    full payment.
+  - Verify whether the property holds a C of O, Governor's Consent, or Gazette.
+  - Insist on physical plot allocation and pegging on-site.
 ---
 
 Buying land in Nigeria is one of the most empowering financial moves an individual or family can make. However, fear of land grabbers ("Omonile"), double allocations, and government acquisitions stops many buyers from taking the leap.
