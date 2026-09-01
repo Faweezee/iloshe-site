@@ -23,32 +23,35 @@ function parseFrontmatter(rawContent) {
 
     const indent = line.search(/\S/);
 
-    // Multiline key: overview: | or overview: >
-    if (trimmed.includes(':') && (trimmed.endsWith('|') || trimmed.endsWith('>'))) {
+    // Multiline key header: overview: | or overview: > or overview: >- or overview: |-
+    if (trimmed.includes(':')) {
       const colonIdx = trimmed.indexOf(':');
-      const key = trimmed.slice(0, colonIdx).trim();
-      let multilineText = [];
-      i++;
-      while (i < lines.length) {
-        const nextLine = lines[i];
-        const nextIndent = nextLine.search(/\S/);
-        if (nextLine.trim() === '') {
-          multilineText.push('');
-          i++;
-          continue;
+      const valAfter = trimmed.slice(colonIdx + 1).trim();
+      if (/^[|>][+-]?$/.test(valAfter)) {
+        const key = trimmed.slice(0, colonIdx).trim();
+        let multilineText = [];
+        i++;
+        while (i < lines.length) {
+          const nextLine = lines[i];
+          const nextIndent = nextLine.search(/\S/);
+          if (nextLine.trim() === '') {
+            multilineText.push('');
+            i++;
+            continue;
+          }
+          if (nextIndent > indent) {
+            multilineText.push(nextLine.trim());
+            i++;
+          } else {
+            i--;
+            break;
+          }
         }
-        if (nextIndent > indent) {
-          multilineText.push(nextLine.trim());
-          i++;
-        } else {
-          i--;
-          break;
-        }
+        data[key] = multilineText.join('\n').trim();
+        currentArrayKey = null;
+        currentObject = null;
+        continue;
       }
-      data[key] = multilineText.join('\n').trim();
-      currentArrayKey = null;
-      currentObject = null;
-      continue;
     }
 
     // List item start: - key: val or - "string"
@@ -119,6 +122,20 @@ function parseFrontmatter(rawContent) {
   return { data, body };
 }
 
+// Helper to clean multiline YAML block header symbols like >- or |- if accidentally captured
+function cleanOverviewText(rawOverview, body, defaultOverview) {
+  if (rawOverview && typeof rawOverview === 'string') {
+    const cleaned = rawOverview.replace(/^[|>][+-]?\s*/, '').trim();
+    if (cleaned.length > 0 && cleaned !== '>-' && cleaned !== '|-' && cleaned !== '>' && cleaned !== '|') {
+      return cleaned;
+    }
+  }
+  if (body && typeof body === 'string' && body.trim().length > 0) {
+    return body.trim();
+  }
+  return defaultOverview || '';
+}
+
 // 1. Get All Dynamic CMS Estates
 export function getCMSEstates() {
   try {
@@ -150,9 +167,7 @@ export function getCMSEstates() {
         ? data.faqs.map(f => ({ question: f.question, answer: f.answer || f.text }))
         : (data.faqs !== undefined ? [] : null);
 
-      const overviewText = (data.overview !== undefined && data.overview !== null && String(data.overview).trim() !== '')
-        ? String(data.overview).trim()
-        : (body && body.trim() !== '' ? body.trim() : (defaultMatch.overview || ''));
+      const overviewText = cleanOverviewText(data.overview, body, defaultMatch.overview);
 
       return {
         id: data.id || filename,
