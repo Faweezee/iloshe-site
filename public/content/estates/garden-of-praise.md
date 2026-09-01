@@ -1,5 +1,5 @@
 ---
-name: Garden Of Praisessss
+name: Garden Of Praise
 tagline: Where the future takes root, and opportunity begins to bloom.
 location: Eleko Junction, By Pan African, Ibeju-Lekki, Lagos State
 region: Ibeju-Lekki
@@ -23,8 +23,8 @@ pricingGrid:
     outright: ₦21,000,000
     sixMonths: ₦29,400,000
     twelveMonths: ₦37,800,000
-overview: >
-  Nestled near Eleko Junction and the prestigious Pan-Atlantic University,
+overview: >-
+  😭Nestled near Eleko Junction and the prestigious Pan-Atlantic University,
   Ibeju-Lekki, Lagos, Garden of Praise sits where vision meets value.
 
 
